@@ -9,14 +9,16 @@ spring:
     username: root
     password: 123456
   redis:
-    host: 172.31.2.52
-    port: 6379
+    host: ${REDIS_HOST:127.0.0.1}
+    port: ${REDIS_PORT:6379}
+    timeout: ${REDIS_TIMEOUT:5s}
+    connect-timeout: ${REDIS_CONNECT_TIMEOUT:5s}
     lettuce:
       pool:
-        max-active: 10
-        max-idle: 10
-        min-idle: 1
-        time-between-eviction-runs: 10s
+        max-active: ${REDIS_POOL_MAX_ACTIVE:10}
+        max-idle: ${REDIS_POOL_MAX_IDLE:10}
+        min-idle: ${REDIS_POOL_MIN_IDLE:1}
+        time-between-eviction-runs: ${REDIS_POOL_EVICTION_INTERVAL:10s}
   jackson:
     default-property-inclusion: non_null # JSON处理时忽略非空字段
 mybatis-plus:
